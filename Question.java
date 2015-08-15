@@ -2,7 +2,8 @@ import java.util.Random;
 
 /**
  * @author Jasmeet Kaur
- * Class questions will configure the question types
+ * Class questions will randomly configure the question type 
+ * and correct answer
  */
 
 public class Question implements RandomTypeGenerator{
@@ -11,37 +12,50 @@ public class Question implements RandomTypeGenerator{
     private String questionType;
     Random rand = new Random();
     
-	public int randomNum(){ //Method that randomly generates a question type
+    //Randomly generates a question type
+    public int randomNum(){ 
 	    int value = rand.nextInt(2);
 	    return value;
 	    //If value = 0 then the question is MCQ.
 	    //If value = 1 then the question is T/F.
     }
 	
-	public void questionType()
+	//Set question type to MCQ or Boolean
+    public String getQuestionType()
 	{
 		if (randomNum() == 0){
-			System.out.println("Question type is: Multiple Choice.");
-			questionType = "mcq";
-			mcqAnswer();
+//			System.out.println("Question type is: Multiple Choice.");
+			return questionType = "mcq";
 		}
 		else{
-			System.out.println("Question type is: T/F.");
-			questionType = "bool";
-			booleanAnswer();
+//			System.out.println("Question type is: T/F.");
+			return questionType = "bool";
 		}	
 	}
 	
-	public String getQuestionType(){
+/*	//getter method
+    public String getQuestionType(){
 		return questionType;
 	}
+	*/
+	//this method call the method to generate the correct answer
+    public void setCorrectAnswer(){
+		if(questionType.equals("mcq")){
+			mcqAnswer();
+		}
+		else{
+			booleanAnswer();
+		}
+	}
 	
+	//Generate a correct answer
 	public void mcqAnswer(){
 		
 			String[] mcqChoices = {"A","B","C","D"};
 			correctAnswer = mcqChoices[rand.nextInt(mcqChoices.length)];
 		}
 	
+	//Generate a correct answer
 	public void booleanAnswer(){
 		
 			String[] boolChoices = {"True","False"};
@@ -49,10 +63,8 @@ public class Question implements RandomTypeGenerator{
 			
 		}
 	
+	//getter method
 	public String getCorrectAnswer(){
-		
-		return correctAnswer;
-		
-	}
-	
+		return correctAnswer;		
+	}	
 }

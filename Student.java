@@ -1,40 +1,34 @@
-import java.util.Random;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
 import java.util.HashSet;
-import java.util.Hashtable;
+import java.util.Random; 
 /**
  * @author Jasmeet Kaur
- * 
+ * Student class will generate class size, student IDs, 
+ * and student answers.
  */
+
 public class Student extends Question {
 	
 	private int numStudents;
 	private String studentID;
 	private String studentAns;
-	private String mult = "mcq";
-	private String bool = "boolean";
-	private String questionType;
-	Random rand = new Random();
-	IVote iVote = new IVote();
-	Question que = new Question();
-	Hashtable<String, String> table = new Hashtable<String, String>();
-
-	//method that randomly generates # of students
+	
+	Random rand = new Random(); //create Random instance	
+	
+	//Generates a class size between 10 and 30 students
 	 public void setNumStudents(){
-		numStudents = rand.nextInt(20) + 10; //Generates a random size of 10 to 30 students.
+		numStudents = rand.nextInt(20) + 10; 
 	}
 	 
-	public int getNumStudents(){
+	//getter method
+	 public int getNumStudents(){
 		return numStudents;
 	}
 	
-	HashSet<String> hash = new HashSet<>(getNumStudents());
+	//Create a HashSet to store unique student IDs
+	 HashSet<String> hash = new HashSet<>(getNumStudents());
 	
-	//Method that generates random alpha-numeric student IDs of 6 characters.
-	public String generateRandomID(){
+	//Generate random alpha-numeric student IDs of 6 characters.
+	public void setStudentID(){
 		char[] characters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789".toCharArray();
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 6; i++){
@@ -43,26 +37,20 @@ public class Student extends Question {
 		}
 		
 		studentID = sb.toString();
-		return studentID;
 	}
 	
 	public String getStudentID(){
 		return studentID;
 	}
 	
-	//Method that stores the student Ids in a hashset so that there are no duplicates
-//	void storeIDs(){
-//		for (int i = 0; i < getNumStudents(); i++){
-//			hash.add(getRandomID());
-//		}//End for loop
-//	}//End method storeIDs.
-
- 	public void answerType(){
-		questionType = super.getQuestionType();
- 		if(questionType == (mult))
- 			booleanAnswer();
- 		else 
+	//Generate student answer
+ 	public void setStudentAnswer(String s){
+ 		if(s.equals("mcq")){
  			mcqAnswer();
+ 		} 			
+ 		else{
+ 			booleanAnswer();
+ 		}
  	}
 	
 	public void mcqAnswer(){
@@ -75,26 +63,9 @@ public class Student extends Question {
  		studentAns = boolChoices[rand.nextInt(boolChoices.length)];
  	}
 	
+ 	//getter method
  	public String getStudentAnswer(){
  		return studentAns;
- 	}
- 	 	
- 	public void studentAnswer(){	
- 		for(int i = 0; i< numStudents; i++){
- 			hash.add(generateRandomID()); 
- 			answerType();	
- 			table.put(studentID, studentAns);
- 	    }
- 	}
- 	
- 	public void printHashtable(){
- 		Set<Entry<String, String>> set = table.entrySet();
- 		Iterator<Entry<String, String>> it = set.iterator();
- 		while(it.hasNext()){
- 			Map.Entry entry = (Map.Entry) it.next();
- 			System.out.printf("\n%-20s%s",entry.getKey() , entry.getValue());
- 		}
- 		
  	}	
 }
 
