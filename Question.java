@@ -24,20 +24,13 @@ public class Question implements RandomTypeGenerator{
     public String getQuestionType()
 	{
 		if (randomNum() == 0){
-//			System.out.println("Question type is: Multiple Choice.");
 			return questionType = "mcq";
 		}
 		else{
-//			System.out.println("Question type is: T/F.");
 			return questionType = "bool";
 		}	
 	}
 	
-/*	//getter method
-    public String getQuestionType(){
-		return questionType;
-	}
-	*/
 	//this method call the method to generate the correct answer
     public void setCorrectAnswer(){
 		if(questionType.equals("mcq")){

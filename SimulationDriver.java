@@ -50,11 +50,6 @@ public class SimulationDriver{
 	    System.out.println("\n\n\niVote Statistics:");
 	    
 	    ivote.printStats();
-	    
-//	    stu.studentAnswer();	    
-//	    stu.printHashtable();
-//	    ivote.calculateStats();
-//	    ivote.printStats();
 	}
 
 }
